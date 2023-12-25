@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <a class="btn btn-primary" href="{% url 'edit_profile' %}">
+      Edit Your Profile</a>
+  </div>
+<div class="card" style="width: 18rem;">
+    <h4>results found : {{data | length}}</h4>
+    {% for post in data  %}
+    <img src="{{post.image.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{post.name}}</h5>
+      <p class="card-text">{{post.discription |truncatewords:10}}</p>
+      <p> ${{post.price}}</p>
+      <p>Author :{{post.brand_name.name}}</p>
+      <a href="{% url "detail_post" %}" class="btn btn-primary">View Details</a>
+    </div>
+    {% endfor %}
+
+  </div>
+{% endblock content %}

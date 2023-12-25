@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="d-flex flex-wrap px-5 pt-3 align-items-center">
+
+    <div class="col-6">
+      <h1 style="background: red;">Welcome to CartMart</h1>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus dolorum delectus necessitatibus temporibus adipisci, harum enim unde, suscipit in ipsum provident hic minima molestias reiciendis nihil veniam aut doloribus, ab quidem sit cum at nemo nulla autem! Dolor quaerat ea voluptatem ullam, consequuntur quisquam ut iste. Vitae exercitationem ipsum blanditiis. Nihil rem in quo magni quam sapiente ad ipsa voluptatum saepe quos temporibus, at iste? Eum saepe eos error ea recusandae, deserunt at quidem odio harum inventore. Necessitatibus eos sapiente architecto optio aut esse, facilis, voluptatibus assumenda ut exercitationem nobis molestias, quisquam nam quia odio ipsa? Voluptatem voluptas distinctio eaque.</p>
+    </div>
+    <div class="col-6">
+  {% comment %} <img style="hight 25%" src="{% static 'ta.jpg' %}" /> {% endcomment %}
+    </div>
+  </div>
+  <hr>
+  <hr>
+<div class="card" style="width: 18rem;">
+    <h4>results found : {{data | length}}</h4>
+    {% for post in data  %}
+    <img src="{{post.image.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{post.name}}</h5>
+      <p class="card-text">{{post.discription |truncatewords:10}}</p>
+      <p> ${{post.price}}</p>
+      <p>Author :{{post.brand_name.name}}</p>
+      <a href="{% url "detail_post" post.id%}" class="btn btn-primary">View Details</a>
+    </div>
+    {% endfor %}
+
+  </div>
+  
+{% endblock content %}

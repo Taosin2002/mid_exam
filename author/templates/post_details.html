@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% load static %} 
+{% block content %}
+<div class="d-flex flex-wrap px-5 pt-3 align-items-center">
+  {% for post in data %}
+  <div class="col-6">
+    <h1 style="background: red">Product Details</h1>
+    <img src="{{post.image.url}}" class="card-img-top" alt="..." />
+  </div>
+  <div class="col-6">
+    <div class="card-body">
+      <h5 class="card-title">{{post.name}}</h5>
+      <p class="card-text">{{post.discription}}</p>
+      <p>${{post.price}}</p>
+      <p>Author :{{post.brand_name.name}}</p>
+      <a href="#" class="btn btn-primary">BUY</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="card m-2">
+    <h5 class="p-3">Total Comments : {{comments | length}}</h5>
+    {% for comment in comments %}
+  <div class="card-body border m-2">
+        <p><b>{{comment.name}}</b> {{comment.created_on}}</p>
+        <p>{{comment.body}}</p>
+    </div>
+    {% endfor %}
+</div>
+<div class="card m-2">
+    <div class="card-body">
+        <form method="post">
+            <h1>Add Comment</h1>
+            {% csrf_token %}
+            {% comment %} {{comment_form | crispy}} {% endcomment %}
+            {{form.as_p}}
+            <button class="btn btn-warning">Submit</button>
+    </div>
+</div>
+{%endblock%}
